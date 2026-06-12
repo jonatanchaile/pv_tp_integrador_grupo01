@@ -10,8 +10,8 @@ export const AdminProvider = ({ children }) => {
     const cerrarSesion  = () => setAdmin(null);
 
     return (
-        <AutorizacionesContext.Provider value={{ admin, guardarSesion, cerrarSesion }}>
+        <AdminContext.Provider value={{ admin, guardarSesion, cerrarSesion }}>
             {children}
-        </AutorizacionesContext.Provider>
+        </AdminContext.Provider>
     );
 };
