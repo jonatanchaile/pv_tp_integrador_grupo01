@@ -1,24 +1,26 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import { Container, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { AdminContext } from '../context/AdminContext'; 
 import autorizacionesService from '../Services/autorizacionesService';
 
 const Login = () => {
-
-    const [form, setForm] = useState({nombre: '',rol: ''});
+    
+    const [form, setForm] = useState({ nombre: '', rol: '' });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [erroresCampo, setErroresCampo] = useState({});
-    const { guardarSesion } = useAutorizaciones();
+    
+    // Consumimos el contexto
+    const { guardarSesion } = useContext(AdminContext);
     const navigate = useNavigate();
 
     const manejarCambio = (e) => {
         const { name, value } = e.target;
-
-        setForm((prev) => ({...prev,[name]: value}));
+        setForm((prev) => ({ ...prev, [name]: value }));
 
         if (erroresCampo[name]) {
-            setErroresCampo((prev) => ({...prev,[name]: null}));
+            setErroresCampo((prev) => ({ ...prev, [name]: null }));
         }
     };
 
@@ -40,7 +42,6 @@ const Login = () => {
         setError(null);
 
         const errores = validarForm(form);
-
         if (Object.keys(errores).length > 0) {
             setErroresCampo(errores);
             return;
@@ -49,55 +50,42 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const admin = await autorizacionesService.login(form.nombre,form.rol);
+            // Se mandan nombre y rol al servicio simulado
+            const adminData = await autorizacionesService.login(form.nombre, form.rol);
 
-            guardarSesion(admin);
+            // Guardamos en el estado global (se activa el useEffect y va al localStorage)
+            guardarSesion(adminData);
 
+            
             navigate('/dashboard');
-
         } catch (err) {
-
-            setError(err.message);
-
+            setError(err.message || 'Error al iniciar sesión');
         } finally {
-
             setLoading(false);
-
         }
     };
 
-    const formularioIncompleto =!form.nombre.trim() ||!form.rol;
+    // si falta rellenar algún campo
+    const formularioIncompleto = !form.nombre.trim() || !form.rol;
 
     return (
         <Container className="mt-5">
-
-            <Card
-                className="mx-auto shadow"
-                style={{ maxWidth: '450px' }}
-            >
-
+            <Card className="mx-auto shadow" style={{ maxWidth: '450px' }}>
                 <Card.Header>
-                    <h2 className="text-center m-0">
-                        Iniciar Sesión
-                    </h2>
+                    <h2 className="text-center m-0">Iniciar Sesión</h2>
                 </Card.Header>
 
                 <Card.Body>
-
                     {error && (
-                        <Alert variant="danger">
+                        <Alert variant="danger" className="text-center">
                             {error}
                         </Alert>
                     )}
 
                     <Form onSubmit={manejarEnvio}>
-
+                        {/* Campo Nombre del Administrador */}
                         <Form.Group className="mb-3">
-
-                            <Form.Label>
-                                Nombre del Administrador
-                            </Form.Label>
-
+                            <Form.Label>Nombre del Administrador</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="nombre"
@@ -106,52 +94,36 @@ const Login = () => {
                                 isInvalid={!!erroresCampo.nombre}
                                 placeholder="Ingrese su nombre"
                             />
-
                             <Form.Control.Feedback type="invalid">
                                 {erroresCampo.nombre}
                             </Form.Control.Feedback>
-
                         </Form.Group>
 
+                        {/* Campo Rol */}
                         <Form.Group className="mb-4">
-
-                            <Form.Label>
-                                Sector
-                            </Form.Label>
-
+                            <Form.Label>Rol / Sector</Form.Label>
                             <Form.Select
-                                name="sector"
+                                name="rol"
                                 value={form.rol}
                                 onChange={manejarCambio}
                                 isInvalid={!!erroresCampo.rol}
                             >
-                                <option value="">
-                                    Seleccione un sector
-                                </option>
-
-                                <option value="soporte">
-                                    Soporte
-                                </option>
-
-                                <option value="gerencia">
-                                    Gerencia
-                                </option>
-
+                                <option value="">Seleccione una opción</option>
+                                <option value="Soporte">Soporte</option>
+                                <option value="Gerencia">Gerencia</option>
                             </Form.Select>
-
                             <Form.Control.Feedback type="invalid">
                                 {erroresCampo.rol}
                             </Form.Control.Feedback>
-
                         </Form.Group>
 
+                        {/* Botón Ingresar */}
                         <Button
                             type="submit"
                             variant="primary"
                             className="w-100"
                             disabled={loading || formularioIncompleto}
                         >
-
                             {loading ? (
                                 <>
                                     <Spinner
@@ -164,15 +136,10 @@ const Login = () => {
                             ) : (
                                 'Ingresar'
                             )}
-
                         </Button>
-
                     </Form>
-
                 </Card.Body>
-
             </Card>
-
         </Container>
     );
 };
