@@ -109,8 +109,8 @@ const Login = () => {
                                 isInvalid={!!erroresCampo.rol}
                             >
                                 <option value="">Seleccione una opción</option>
-                                <option value="Soporte">Soporte</option>
-                                <option value="Gerencia">Gerencia</option>
+                                <option value="soporte">Soporte</option>
+                                <option value="gerencia">Gerencia</option>
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">
                                 {erroresCampo.rol}
