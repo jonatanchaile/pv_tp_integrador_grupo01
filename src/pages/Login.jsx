@@ -108,7 +108,7 @@ const Login = () => {
                                 onChange={manejarCambio}
                                 isInvalid={!!erroresCampo.rol}
                             >
-
+                                <option value="">Seleccione un rol</option>
                                 <option value="soporte">Soporte</option>
                                 <option value="gerencia">Gerencia</option>
                             </Form.Select>
