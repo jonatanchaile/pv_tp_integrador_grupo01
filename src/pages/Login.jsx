@@ -69,8 +69,8 @@ const Login = () => {
     const formularioIncompleto = !form.nombre.trim() || !form.rol;
 
     return (
-        <Container className="mt-5">
-            <Card className="mx-auto shadow" style={{ maxWidth: '450px' }}>
+        <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+                    <Card className="shadow w-100" style={{ maxWidth: '450px' }}>
                 <Card.Header>
                     <h2 className="text-center m-0">Iniciar Sesión</h2>
                 </Card.Header>
@@ -108,7 +108,7 @@ const Login = () => {
                                 onChange={manejarCambio}
                                 isInvalid={!!erroresCampo.rol}
                             >
-                                <option value="">Seleccione una opción</option>
+
                                 <option value="soporte">Soporte</option>
                                 <option value="gerencia">Gerencia</option>
                             </Form.Select>

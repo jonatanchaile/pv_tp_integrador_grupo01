@@ -19,7 +19,7 @@ const Header = () => {
 
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text className="me-3">
-            {admin?.nombre} - {admin?.rol}
+            {admin?.nombre} - {admin?.rol.charAt(0).toUpperCase() + admin?.rol.slice(1)}
           </Navbar.Text>
 
           <Button variant="outline-light" onClick={manejarCerrarSesion}>

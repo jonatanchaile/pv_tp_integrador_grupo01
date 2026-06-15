@@ -27,9 +27,9 @@ const Dashboard = () => {
                         <hr />
 
                         <p>
-                            <strong>Rol:</strong> {admin?.rol}
+                            <strong>Rol:</strong> {admin?.rol.charAt(0).toUpperCase() + admin?.rol.slice(1)}
                         </p>
-
+                        
                         <p>
                             Has iniciado sesión correctamente en el sistema.
                         </p>
