@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import RutaProtegida from './RutaProtegida';
+import ListaClientes from '../pages/ListaClientes'
 
 const AppRoutes = () => {
     return (
@@ -30,6 +31,15 @@ const AppRoutes = () => {
                 }
             />
 
+            {/* Lista Clientes protegida */}
+            <Route
+                path='/clientes'
+                element={
+                    <RutaProtegida>
+                        <ListaClientes />
+                    </RutaProtegida>
+                }
+            />
             {/* Ruta inexistente */}
             <Route
                 path="*"

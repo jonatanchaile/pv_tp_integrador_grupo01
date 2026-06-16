@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { Container, Card } from 'react-bootstrap';
 import { AdminContext } from '../context/AdminContext';
-import Header from '../components/Header';
 
 const Dashboard = () => {
 
@@ -9,8 +8,6 @@ const Dashboard = () => {
 
     return (
         <>
-            <Header />
-
             <Container className="mt-4">
 
                 <Card className="shadow">
