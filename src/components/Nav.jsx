@@ -16,6 +16,11 @@ const Nav = () => {
                             Gestión de Clientes
                         </BootstrapNav.Link>
                     </BootstrapNav.Item>
+                     <BootstrapNav.Item>
+                        <BootstrapNav.Link as={NavLink} to="/nuevos">
+                            Agregar Clientes
+                        </BootstrapNav.Link>
+                    </BootstrapNav.Item>
                 </BootstrapNav>
             </Container>
         </div>
