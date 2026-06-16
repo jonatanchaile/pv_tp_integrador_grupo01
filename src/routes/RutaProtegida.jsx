@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AdminContext } from '../context/AdminContext';
+import Header from '../components/Header';
+import Nav from '../components/Nav';
 
 const RutaProtegida = ({ children }) => {
 
@@ -10,7 +12,15 @@ const RutaProtegida = ({ children }) => {
         return <Navigate to="/login" replace />;
     }
 
-    return children;
+   return (
+        <>
+            <Header />
+            <Nav />
+            <main>
+                {children}
+            </main>
+        </>
+   )
 };
 
 export default RutaProtegida;
