@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import RutaProtegida from './RutaProtegida';
 import ListaClientes from '../pages/ListaClientes'
+import NotFound from '../pages/NotFound'; 
 
 const AppRoutes = () => {
     return (
@@ -43,8 +44,12 @@ const AppRoutes = () => {
             {/* Ruta inexistente */}
             <Route
                 path="*"
-                element={<Navigate to="/login" replace />}
+              element={<NotFound />} // 
             />
+              
+            
+            
+            
 
         </Routes>
     );
