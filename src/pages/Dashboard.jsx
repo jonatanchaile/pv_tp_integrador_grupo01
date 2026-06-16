@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Container, Card } from 'react-bootstrap';
 import { AdminContext } from '../context/AdminContext';
 import Header from '../components/Header';
-
+import Nav from '../components/Nav';
 const Dashboard = () => {
 
     const { admin } = useContext(AdminContext);
@@ -10,7 +10,7 @@ const Dashboard = () => {
     return (
         <>
             <Header />
-
+            <Nav />
             <Container className="mt-4">
 
                 <Card className="shadow">
