@@ -5,7 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import RutaProtegida from './RutaProtegida';
 import ListaClientes from '../pages/ListaClientes'
 import NotFound from '../pages/NotFound'; 
-
+import ClientesNuevos from '../pages/ClientesNuevos'
 const AppRoutes = () => {
     return (
         <Routes>
@@ -41,6 +41,16 @@ const AppRoutes = () => {
                     </RutaProtegida>
                 }
             />
+
+            {/* Nuevos Clientes */}
+            <Route
+                path='/nuevos'
+                element={
+                    <RutaProtegida>
+                        <ClientesNuevos />
+                    </RutaProtegida>
+                }
+            />    
             {/* Ruta inexistente */}
             <Route
                 path="*"
