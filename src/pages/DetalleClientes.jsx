@@ -4,12 +4,13 @@ import { Card, Container, Spinner, Alert, Button } from 'react-bootstrap';
 
 import clientesService from '../services/clientesService';
 import { AdminContext } from '../context/AdminContext';
-
+import {useNavigate} from 'react-router-dom';
 const DetalleClientes = () => {
 
     const { id } = useParams();
 
     const { admin } = useContext(AdminContext);
+    const navigate = useNavigate();
 
     const [cliente, setCliente] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -39,6 +40,31 @@ const DetalleClientes = () => {
         cargarCliente();
 
     }, [id]);
+
+    const manejarEliminar = async () => {
+
+    const confirmar = window.confirm(
+        '¿Desea eliminar este cliente?'
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        await clientesService.eliminarCliente(id);
+
+        alert('Cliente eliminado correctamente');
+
+        navigate('/clientes');
+
+    } catch (error) {
+
+        alert(error.message);
+
+    }
+};
 
     return (
         <Container className="mt-4">
@@ -115,7 +141,9 @@ const DetalleClientes = () => {
                             <>
                                 <hr />
 
-                                <Button variant="danger">
+                                <Button variant="danger"
+                                    onClick={manejarEliminar} 
+                                >
                                     Eliminar Cliente de la Base de Datos
                                 </Button>
                             </>
