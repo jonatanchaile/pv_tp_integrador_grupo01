@@ -11,9 +11,19 @@ const clientesService = (() =>{
         const clientes = await response.json();
         return [...clientes];
     }
+const obtenerClientePorId = async (id) => {
 
+    const response = await fetch(`${API_URL}/${id}`);
+
+    if (!response.ok) {
+        throw new Error(`Error al obtener cliente: ${response.status}`);
+    }
+
+    return await response.json();
+};
     return {
-        obtenerClientes
+        obtenerClientes,
+        obtenerClientePorId
     }
 })();
 
