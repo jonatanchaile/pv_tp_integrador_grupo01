@@ -5,7 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import ListaClientes from '../pages/ListaClientes';
 import ClientesNuevos from '../pages/ClientesNuevos';
 import NotFound from '../pages/NotFound';
-
+import DetalleClientes from '../pages/DetalleClientes';
 import RutaProtegida from '../routes/RutaProtegida';
 
 const routes = createBrowserRouter([
@@ -49,7 +49,17 @@ const routes = createBrowserRouter([
   {
     path: '*',
     element: <NotFound />,
-  },
+  }, 
+
+  {
+  path: '/clientes/:id',
+  element: (
+    <RutaProtegida>
+      <DetalleClientes />
+    </RutaProtegida>
+  ),
+},
+
 ]);
 
 export default routes;

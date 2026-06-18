@@ -1,7 +1,9 @@
 import { Card, Button, CardBody } from "react-bootstrap";
+import {useNavigate} from 'react-router-dom';
 
 const ClienteCard = ({ cliente }) => {
   const { id, name, email, phone, address } = cliente;
+  const navigate = useNavigate();
 
   return (
     <Card className="tarjeta shadow-sm h-100">
@@ -32,11 +34,12 @@ const ClienteCard = ({ cliente }) => {
                 Eliminar
             </Button>
         
-            <Button variant="primary" className="boton-accion">
+            <Button variant="primary" className="boton-accion"
+              onClick={() => navigate(`/clientes/${cliente.id}`)}
+            >
                 Ver Detalle
             </Button>
         </div>
-        
       </CardBody>
     </Card>
   );
