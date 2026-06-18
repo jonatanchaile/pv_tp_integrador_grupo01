@@ -1,17 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import { RouterProvider } from 'react-router-dom';
+
+import AppRoutes from './routes/AppRoutes';
+
+import { AdminProvider } from './context/AdminContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './App.jsx'
-import { AdminProvider } from './context/AdminContext.jsx';
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
-      <AdminProvider>
-        <App />
-      </AdminProvider>
-    </BrowserRouter>
-  </StrictMode>,
-); 
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <AdminProvider>
+      <RouterProvider router={AppRoutes} />
+    </AdminProvider>
+  </React.StrictMode>
+);
