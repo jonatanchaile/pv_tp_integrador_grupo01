@@ -1,68 +1,55 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
-import RutaProtegida from './RutaProtegida';
-import ListaClientes from '../pages/ListaClientes'
-import NotFound from '../pages/NotFound'; 
-import ClientesNuevos from '../pages/ClientesNuevos'
-const AppRoutes = () => {
-    return (
-        <Routes>
+import ListaClientes from '../pages/ListaClientes';
+import ClientesNuevos from '../pages/ClientesNuevos';
+import NotFound from '../pages/NotFound';
 
-            {/* Redirección inicial */}
-            <Route
-                path="/"
-                element={<Navigate to="/login" replace />}
-            />
+import RutaProtegida from '../routes/RutaProtegida';
 
-            {/* Login */}
-            <Route
-                path="/login"
-                element={<Login />}
-            />
+const routes = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/login" replace />,
+  },
 
-            {/* Dashboard protegido */}
-            <Route
-                path="/dashboard"
-                element={
-                    <RutaProtegida>
-                        <Dashboard />
-                    </RutaProtegida>
-                }
-            />
+  {
+    path: '/login',
+    element: <Login />,
+  },
 
-            {/* Lista Clientes protegida */}
-            <Route
-                path='/clientes'
-                element={
-                    <RutaProtegida>
-                        <ListaClientes />
-                    </RutaProtegida>
-                }
-            />
+  {
+    path: '/dashboard',
+    element: (
+      <RutaProtegida>
+        <Dashboard />
+      </RutaProtegida>
+    ),
+  },
 
-            {/* Nuevos Clientes */}
-            <Route
-                path='/nuevos'
-                element={
-                    <RutaProtegida>
-                        <ClientesNuevos />
-                    </RutaProtegida>
-                }
-            />    
-            {/* Ruta inexistente */}
-            <Route
-                path="*"
-              element={<NotFound />} // 
-            />
-              
-            
-            
-            
+  {
+    path: '/clientes',
+    element: (
+      <RutaProtegida>
+        <ListaClientes />
+      </RutaProtegida>
+    ),
+  },
 
-        </Routes>
-    );
-};
+  {
+    path: '/nuevos',
+    element: (
+      <RutaProtegida>
+        <ClientesNuevos />
+      </RutaProtegida>
+    ),
+  },
 
-export default AppRoutes;
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
+
+export default routes;
