@@ -6,7 +6,7 @@ import autorizacionesService from '../Services/autorizacionesService';
 
 const Login = () => {
     
-    const [form, setForm] = useState({ nombre: '', rol: '' });
+    const [form, setForm] = useState({ nombre: '', rol: '', password: '' });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [erroresCampo, setErroresCampo] = useState({});
@@ -24,11 +24,15 @@ const Login = () => {
         }
     };
 
-    const validarForm = ({ nombre, rol }) => {
+    const validarForm = ({ nombre, rol, password }) => {
         const errores = {};
         if (!nombre.trim()) {
             errores.nombre = 'El nombre es obligatorio';
         }
+
+        if (!password.trim()) {
+            errores.password = 'La contraseña es obligatoria';
+        } 
 
         if (!rol) {
             errores.rol = 'Debe seleccionar un rol';
@@ -50,8 +54,8 @@ const Login = () => {
         setLoading(true);
 
         try {
-            // Se mandan nombre y rol al servicio simulado
-            const adminData = await autorizacionesService.login(form.nombre, form.rol);
+            // Se mandan nombre, rol y contraseña al servicio simulado
+            const adminData = await autorizacionesService.login(form.nombre, form.rol, form.password);
 
             // Guardamos en el estado global (se activa el useEffect y va al localStorage)
             guardarSesion(adminData);
@@ -66,7 +70,7 @@ const Login = () => {
     };
 
     // si falta rellenar algún campo
-    const formularioIncompleto = !form.nombre.trim() || !form.rol;
+    const formularioIncompleto = !form.nombre.trim() || !form.password || !form.rol;
 
     return (
         <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
@@ -96,6 +100,22 @@ const Login = () => {
                             />
                             <Form.Control.Feedback type="invalid">
                                 {erroresCampo.nombre}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                      {/* Campo contraseña */}
+                        <Form.Group className="mb-3">
+                            <Form.Label>Contraseña</Form.Label>
+                            <Form.Control
+                                type="password"
+                                name="password"
+                                value={form.password}
+                                onChange={manejarCambio}
+                                isInvalid={!!erroresCampo.password}
+                                placeholder="Ingrese su contraseña"
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {erroresCampo.contrasena}
                             </Form.Control.Feedback>
                         </Form.Group>
 

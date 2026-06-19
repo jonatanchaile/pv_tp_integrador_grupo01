@@ -3,7 +3,7 @@ import FormClientes from '../components/FormClientes';
 
 const ClientesNuevos = () => {
     // Función síncrona básica: solo recibe y muestra lo que capturó el formulario
-    const handleAgregarUsuario = (datosDelFormulario) => {
+    const AgregarUsuario = (datosDelFormulario) => {
         console.log("¡Éxito! Datos capturados por el formulario:", datosDelFormulario);
         alert("Formulario enviado. Abre la consola (F12) para ver el objeto generado.");
     };
@@ -15,7 +15,7 @@ const ClientesNuevos = () => {
                 </Card.Header>
 
                 <Card.Body>
-                    <FormClientes agregarUsuario={handleAgregarUsuario} />
+                    <FormClientes agregarUsuario={AgregarUsuario} />
                 </Card.Body>
             </Card>
         </Container>
