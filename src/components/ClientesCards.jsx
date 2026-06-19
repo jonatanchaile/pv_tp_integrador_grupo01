@@ -30,14 +30,11 @@ const ClienteCard = ({ cliente }) => {
         
         {/* Botones listos visualmente para futuras implementaciones */}
         <div className="d-flex flex-column gap-3 mt-auto w-100">
-            <Button variant="outline-info">
-                Eliminar
-            </Button>
         
             <Button variant="primary" className="boton-accion"
               onClick={() => navigate(`/clientes/${cliente.id}`)}
             >
-                Ver Detalle
+                Ver Ficha Completa
             </Button>
         </div>
       </CardBody>
