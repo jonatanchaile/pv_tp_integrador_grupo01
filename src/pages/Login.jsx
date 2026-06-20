@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react'; 
+import { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import { Container, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
-import { AdminContext } from '../context/AdminContext'; 
+import { useAdmin } from '../hooks/useAdmin';
 import autorizacionesService from '../Services/autorizacionesService';
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
     const [erroresCampo, setErroresCampo] = useState({});
     
     // Consumimos el contexto
-    const { guardarSesion } = useContext(AdminContext);
+    const { guardarSesion } = useAdmin();
     const navigate = useNavigate();
 
     const manejarCambio = (e) => {
@@ -86,7 +86,7 @@ const Login = () => {
                         </Alert>
                     )}
 
-                    <Form onSubmit={manejarEnvio}>
+                    <Form onSubmit={manejarEnvio}noValidate> 
                         {/* Campo Nombre del Administrador */}
                         <Form.Group className="mb-3">
                             <Form.Label>Nombre del Administrador</Form.Label>

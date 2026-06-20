@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import {useAdmin} from '../hooks/useAdmin';
 import { Container, Card } from 'react-bootstrap';
-import { AdminContext } from '../context/AdminContext';
+
+
 
 const Dashboard = () => {
 
-    const { admin } = useContext(AdminContext);
+    const { admin } = useAdmin();
 
     return (
         <>
