@@ -1,7 +1,7 @@
 import {useAdmin} from '../hooks/useAdmin';
 import { Navigate } from 'react-router-dom';
-import Header from '../components/Header';
-import Nav from '../components/Nav';
+import Header from './Header';
+import Nav from './Nav';
 
 const RutaProtegida = ({ children }) => {
 
