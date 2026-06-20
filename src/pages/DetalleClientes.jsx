@@ -1,15 +1,15 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card, Container, Spinner, Alert, Button } from 'react-bootstrap';
 
 import clientesService from '../services/clientesService';
-import { AdminContext } from '../context/AdminContext';
+import {useAdmin} from '../hooks/useAdmin';
 import {useNavigate} from 'react-router-dom';
 const DetalleClientes = () => {
 
     const { id } = useParams();
 
-    const { admin } = useContext(AdminContext);
+    const { admin } = useAdmin();
     const navigate = useNavigate();
 
     const [cliente, setCliente] = useState(null);
