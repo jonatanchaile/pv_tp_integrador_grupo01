@@ -6,7 +6,7 @@ import ListaClientes from '../pages/ListaClientes';
 import ClientesNuevos from '../pages/ClientesNuevos';
 import ErrorPage from '../pages/ErrorPage';
 import DetalleClientes from '../pages/DetalleClientes';
-import RutaProtegida from '../routes/RutaProtegida';
+import RutaProtegida from '../components/RutaProtegida';
 
 const routes = createBrowserRouter([
   {
